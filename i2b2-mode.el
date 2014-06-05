@@ -22,7 +22,7 @@
 ;;; Commentary:
 ;;  A minor mode applicable to maybe 5 people (being generous) worldwide.
 
-(require 'dash)
+(require 'cl)
 (require 'xml)
 
 ;;; Code:
@@ -50,12 +50,11 @@
 
 (defun i2b2-get-phi(&optional buffer)
   "Returns all PHI Tags in the form of a cons with the XML Attributes as properties."
-  (-filter (lambda(arg)
-             (not (stringp arg)))
-           (xml-node-children
-            (assq 'TAGS (car
-                         (xml-parse-region nil nil (or buffer
-                                                       (current-buffer))))))))
+  (remove-if 'stringp
+             (xml-node-children
+              (assq 'TAGS (car
+                           (xml-parse-region nil nil (or buffer
+                                                         (current-buffer))))))))
 
 (defun i2b2-background-phi-tag(phi-tag &optional buffer)
   "Takes a PHI Tag and a buffer and takes it's start and end attributes and sets an overlay
@@ -79,7 +78,7 @@
 
 (defun i2b2-remove-overlays()
   "Removes all existing i2b2 overlays."
-  (-map 'delete-overlay i2b2-overlays))
+  (mapc 'delete-overlay i2b2-overlays))
 
 (defun i2b2-text-start-pos(&optional buffer)
   "Hack, gets actual starting position of TEXT node, assumes CDATA tag will be there."
