@@ -1,4 +1,4 @@
-;;; scratchi2b2.el --- Highlights corresponding PHI data in the text portion of an i2b2 XML Document.
+;;; i2b2-mode.el --- Highlights corresponding PHI data in the text portion of an i2b2 XML Document.
 
 ;; Copyright (C) 2014 Dan LaManna
 
