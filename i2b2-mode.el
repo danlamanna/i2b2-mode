@@ -84,7 +84,7 @@
   "Hack, gets actual starting position of TEXT node, assumes CDATA tag will be there."
   (with-current-buffer (or buffer
                            (current-buffer))
-    (+ (string-match "\\(<TEXT>[[:space:]]+<!\\[CDATA\\[\\)" (buffer-string))
+    (+ (string-match "\\(<TEXT>[[:space:]]?+<!\\[CDATA\\[\\)" (buffer-string))
        (length (match-string-no-properties 0 (buffer-string)))
        1)))
 
